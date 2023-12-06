@@ -66,6 +66,48 @@ main()
         count += id
     }
     console.log(count)
+    // PART II
+
+    console.log(data)
+    const game1 = data.get('Game 1')
+
+    console.log(game1)
+    const game1Set = game1[0]
+    console.log(game1Set)
+
+    const getMins = game => {
+        let mins = {red: 0, green: 0, blue: 0};
+        game.forEach(set => {
+            if (set.red > mins.red) mins.red = set.red
+            if (set.blue > mins.blue) mins.blue = set.blue
+            if (set.green > mins.green) mins.green = set.green
+        })
+        return mins
+    }
+    const minMap = new Map();
+    for (let [key, value] of data) {
+        minMap.set(key, getMins(value))
+    }
+
+    const multiplyMap = new Map();
+
+    for (let [key, value] of minMap) {
+        // console.log(`mINS`, key, getMins(value))
+        // minMap.set(key, getMins(value))
+        console.log(`value`, key)
+        let multiplier = 1;
+        // if (value.red > 0) multiplier *= value.red
+        multiplyMap.set(key, value.red * value.blue * value.green)
+    }
+    
+    console.log(multiplyMap)
+
+    let sumOfMultipliers = 0;
+
+    for (let [key, value] of multiplyMap) {
+        sumOfMultipliers += value
+    }
+    console.log(sumOfMultipliers)
 })
 .catch((err) => {
         console.error(err);
