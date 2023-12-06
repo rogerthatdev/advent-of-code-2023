@@ -41,13 +41,33 @@ async function main() {
 
 main()
 .then((data) => {
-    console.log(data.get('Game 1'));
+    console.log(data);
+
+    const checkForLimits = (cubeSet) => {
+        const limits = {red: 12, green: 13, blue: 14}
+        for (let [key, value] of Object.entries(cubeSet)) {
+            if (value > limits[key]) return false
+        }
+        return true
+    }
+
+    const possibleGames = new Map();
+
+    for (let [key, value] of data) {
+        
+        if (value.map(set => checkForLimits(set)).reduce((a,b)=> a && b)) {
+            possibleGames.set(key, value)
+        }
+    }
+
+    let count = 0;
+    for (let [key, value] of possibleGames) {
+        let id = parseInt(key.split(' ')[1])
+        count += id
+    }
+    console.log(count)
 })
 .catch((err) => {
         console.error(err);
     });
-
-
-const sample = '3'
-const sample2 = 'ffwoeiweonefjdoifjdsf'
 
