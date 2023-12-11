@@ -37,8 +37,9 @@ const findNumericalIndexes = anArray => {
     return indexes;
 }
 
-parseInput('./input.txt').then(data => {
-    console.log(data);
-})
+const findNumbersInArray = anArray => {
+    return anArray.join('').split(/\.+/).filter(x => x.length > 0).map(x => parseInt(x))
 
-export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes }
+}
+
+export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, findNumbersInArray }
