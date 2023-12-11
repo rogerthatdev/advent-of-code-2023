@@ -22,11 +22,23 @@ const findSymbols = x => {
     return symbolIndexes
 }
 
-// parseInput('./input.txt')
-// .then(data => {
-//     console.log(data[0])
-// })
+const checkIndexForSymbol = (anArray, index) => {
+    const exceptions = ['.'];
+    return !/^[a-zA-Z0-9]+$/.test(anArray[index]) && !exceptions.includes(anArray[index]) ? true : false;
+}
 
-console.log(findSymbols(['.', '.', '=', '.']))
+const findNumericalIndexes = anArray => {
+    let indexes = [];
+    for (let i = 0; i < anArray.length; i++) {
+        if (/^[0-9]+$/.test(anArray[i])) {
+            indexes.push(i)
+        }
+    }
+    return indexes;
+}
 
-export { parseInput, findSymbols }
+parseInput('./input.txt').then(data => {
+    console.log(data);
+})
+
+export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes }
