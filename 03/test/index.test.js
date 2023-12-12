@@ -1,4 +1,4 @@
-import { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, findNumbersInArray } from "../index";
+import { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, findNumbersInArray, groupConsecutiveNumbers } from "../index";
 
 describe("findSymbols", () => {
   it("returns an array", () => {
@@ -13,23 +13,22 @@ describe("check index for symbol", () => {
     expect(data).toEqual(true);
   });
 
-    it("returns false for index 2 in ['.', '.', '.', '.']", () => {
-      const data = checkIndexForSymbol(['.', '.', '.', '.'], 2);
-      expect(data).toEqual(false);
+  it("returns false for index 2 in ['.', '.', '.', '.']", () => {
+    const data = checkIndexForSymbol(['.', '.', '.', '.'], 2);
+    expect(data).toEqual(false);
   });
 });
 
 describe("finding numerical indexes", () => {
-  it("returns array of 2 indexes", () => {
-    const data = findNumericalIndexes(['.', '5', '1', '.']);
-    expect(data).toEqual([1, 2]);
+  it("returns array of 3 indexes", () => {
+    const data = findNumericalIndexes(['.', '5', '1', '.', '5']);
+    expect(data).toEqual([1, 2, 4]);
   });
 });
 
-describe("finding numbers in an array", () => {
-  it("returns an array of 2 numbers", () => {
-    const data = findNumbersInArray(['1', '.', '.', '3', '4']);
-    console.log(data)
-    expect(data).toEqual([1, 34]);
-  });
-});
+describe("grouping consecutive numbers", () => {
+  it("returns groups of consecutive numbers", () => {
+    const data = groupConsecutiveNumbers([1, 2, 4, 5, 9]);
+    expect(data).toEqual([[1, 2], [4, 5], [9]]);
+  })
+})
