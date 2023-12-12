@@ -131,10 +131,44 @@ const answerPart2 = async (input) => {
     let count = 0;
     parsedData.forEach((line, index) => {
 
+        const gears = findGearIndexes(line);
+        // console.log(gears)
 
+        const precedingLine = index > 0 ? parsedData[index - 1] : [];
+        // console.log(precedingLine)
+        const precedingLineNumbersObjects = findNumbersInArray(precedingLine)
+        // console.log(precedingLineNumbersObjects)
+
+        const proceedingLine = index < parsedData.length - 1 ? parsedData[index + 1] : [];
+        const proceedingLineNumbersObjects = findNumbersInArray(proceedingLine)
+
+        const currentLineNumbersObjects = findNumbersInArray(line)
+        // console.log(proceedingLineNumbersObjects)
+
+        gears.forEach(position => {
+            const precedingLineMatches = precedingLineNumbersObjects.filter(numberObject => {
+                // console.log()
+                return checkForCommonItems([position, position - 1, position + 1], numberObject.indexes)
+            })
+
+            const proceedingLineMatches = proceedingLineNumbersObjects.filter(numberObject => {
+                // console.log()
+                return checkForCommonItems([position, position - 1, position + 1], numberObject.indexes)
+            })
+
+            const currentLineMatches = currentLineNumbersObjects.filter(numberObject => {
+                // console.log()
+                return checkForCommonItems([position - 1, position + 1], numberObject.indexes)
+            })
+            const allMatches = [...precedingLineMatches, ...currentLineMatches, ...proceedingLineMatches]
+            if (allMatches.length == 2) {
+                const gearRatio = allMatches[0].value * allMatches[1].value
+                console.log(gearRatio)
+                count += gearRatio
+            }
+        })
     })
+    return count
 }
-
-// answerPart2('./test.txt')
-
-export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, groupConsecutiveNumbers, findNumbersInArray, answerPart1, findGearIndexes }
+// answerPart2('./input.txt')
+export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, groupConsecutiveNumbers, findNumbersInArray, answerPart1, findGearIndexes, answerPart2 }
