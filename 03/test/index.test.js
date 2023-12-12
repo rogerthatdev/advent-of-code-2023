@@ -23,6 +23,10 @@ describe("finding numerical indexes", () => {
   it("returns array of 3 indexes", () => {
     const data = findNumericalIndexes(['.', '5', '1', '.', '5']);
     expect(data).toEqual([1, 2, 4]);
+  }),
+  it("works with symbols in the array", () => {
+    const data = findNumericalIndexes(['*', '5', '1', '*', '5']);
+    expect(data).toEqual([1, 2, 4]);
   });
 });
 
@@ -38,7 +42,7 @@ describe("numbers and their indexes in an array", () => {
     const data = findNumbersInArray(['.', '5', '1', '.', '5']);
     expect(data[0]).toEqual({ indexes: [1, 2], value: 51 });
     expect(data[1]).toEqual({ indexes: [4], value: 5 });
-  }),
+  })
   it("works with symbols in the array", () => {
     const data = findNumbersInArray(['*', '5', '1', '.', '5']);
     expect(data[0]).toEqual({ indexes: [1, 2], value: 51 });

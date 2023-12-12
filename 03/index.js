@@ -59,7 +59,9 @@ const groupConsecutiveNumbers = anArray => {
 const findNumbersInArray = anArray => {
     let numberObjectList = [];
     const numericalIndexes = findNumericalIndexes(anArray);
+    console.log(numericalIndexes)
     const groups = groupConsecutiveNumbers(numericalIndexes);
+    anArray = anArray.map(x => !/^[0-9]+$/.test(x) ? '.' : x)
     const numbers = anArray.join('').split(/\.+/).filter(x => x.length > 0).map(x => parseInt(x))
     
     for (let i = 0; i < groups.length; i++){
@@ -69,7 +71,16 @@ const findNumbersInArray = anArray => {
         })
     }
     return numberObjectList
-    
 }
 
+console.log(findNumbersInArray(['*', '5', '1', '.', '5']))
+// const answerPart1 = async () => {
+//     const parsedData = await parseInput('./input.txt');
+
+//     console.log(parsedData[1])
+//     console.log(findSymbols(parsedData[1]))
+//     console.log(findNumbersInArray(parsedData[1]))
+// }
+
+// answerPart1()
 export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, groupConsecutiveNumbers, findNumbersInArray }
