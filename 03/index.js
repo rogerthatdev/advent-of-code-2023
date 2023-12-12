@@ -72,14 +72,6 @@ const findNumbersInArray = anArray => {
     }
     return numberObjectList
 }
-
-
-// TODO: put it all together and get the answer
-// use checkIndexForSymbol on: 
-//   - current line, indexes[0]-1
-//   - current line, indexes[indexes.length]
-//   - previous line, indexes[0]-1, indexes[indexes.length], rest of indexes
-//   - proceeding line, indexes[0]-1, indexes[indexes.length], rest of indexes
 const checkForCommonItems = (array1, array2) => {
     return array1.some(item => array2.includes(item))
 }
@@ -88,21 +80,6 @@ const answerPart1 = async () => {
     const parsedData = await parseInput('./input.txt')
 
     let count = 0;
-
-    // parsedData.forEach(line => {
-    //     const numbersObjects =  findNumbersInArray(line)
-    //     numbersObjects.forEach(number => {
-    //         let numberValue = number.value
-    //         let indexes = number.indexes
-    //         let leftOf = indexes[0] > 0 ? indexes[0]-1 : null;
-    //         let rightOf = indexes[indexes.length-1] == parsedData[0].length-1 ? 'null' : indexes[indexes.length-1]+1;
-    //         if(checkIndexForSymbol(line, leftOf) || checkIndexForSymbol(line,rightOf)){
-    //             count+=numberValue
-    //         }
-    //     })
-    // })
-    // console.log('only numbers with left right symbols: ', count)
-
     parsedData.forEach((line, index) => {
         const currentLineSymbols = findSymbols(line);
 
@@ -121,17 +98,14 @@ const answerPart1 = async () => {
             let rightOf = indexes[indexes.length - 1] == parsedData[0].length - 1 ? null : indexes[indexes.length - 1] + 1;
             if (checkForCommonItems(currentLineSymbols, [leftOf, rightOf])) {
                 count += numberObject.value
-                // console.log('found in line', numberObject.value)
             } else if (checkForCommonItems(precedingLineSymbols, [leftOf, ...numberObject.indexes, rightOf])) {
                 count += numberObject.value
-                // console.log('found above', numberObject.value)
             } else if (checkForCommonItems(proceedingLineSymbols, [leftOf,...numberObject.indexes, rightOf])) {
                 count += numberObject.value
                 console.log('found below', numberObject.value)
             } else {
                 console.log(precedingLineSymbols)
                 console.log(proceedingLineSymbols)
-                // console.log(numberObject)
                 console.log('loser', numberObject.value)}
         })
     })
