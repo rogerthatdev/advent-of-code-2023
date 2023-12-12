@@ -59,7 +59,6 @@ const groupConsecutiveNumbers = anArray => {
 const findNumbersInArray = anArray => {
     let numberObjectList = [];
     const numericalIndexes = findNumericalIndexes(anArray);
-    console.log(numericalIndexes)
     const groups = groupConsecutiveNumbers(numericalIndexes);
     anArray = anArray.map(x => !/^[0-9]+$/.test(x) ? '.' : x)
     const numbers = anArray.join('').split(/\.+/).filter(x => x.length > 0).map(x => parseInt(x))
@@ -73,14 +72,35 @@ const findNumbersInArray = anArray => {
     return numberObjectList
 }
 
-console.log(findNumbersInArray(['*', '5', '1', '.', '5']))
-// const answerPart1 = async () => {
-//     const parsedData = await parseInput('./input.txt');
 
-//     console.log(parsedData[1])
-//     console.log(findSymbols(parsedData[1]))
-//     console.log(findNumbersInArray(parsedData[1]))
-// }
+// TODO: put it all together and get the answer
+// use checkIndexForSymbol on: 
+//   - current line, indexes[0]-1
+//   - current line, indexes[indexes.length]
+//   - previous line, indexes[0]-1, indexes[indexes.length], rest of indexes
+//   - proceeding line, indexes[0]-1, indexes[indexes.length], rest of indexes
 
-// answerPart1()
+const answerPart1 = async () => {
+    const parsedData = await parseInput('./input.txt')
+   
+    let count = 0;
+
+    parsedData.forEach(line => {
+        const numbersObjects =  findNumbersInArray(line)
+        numbersObjects.forEach(number => {
+            let numberValue = number.value
+            let indexes = number.indexes
+            let leftOf = indexes[0] > 0 ? indexes[0]-1 : null;
+            let rightOf = indexes[indexes.length-1] == parsedData[0].length-1 ? 'null' : indexes[indexes.length-1]+1;
+            if(checkIndexForSymbol(line, leftOf) || checkIndexForSymbol(line,rightOf)){
+                count+=numberValue
+            }
+        })
+    })
+    console.log('only numbers with left right symbols: ', count)
+
+}
+
+answerPart1()
+
 export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, groupConsecutiveNumbers, findNumbersInArray }
