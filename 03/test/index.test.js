@@ -1,4 +1,4 @@
-import { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, findNumbersInArray, groupConsecutiveNumbers } from "../index";
+import { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, findNumbersInArray, groupConsecutiveNumbers, answerPart1 } from "../index";
 
 describe("findSymbols", () => {
   it("returns an array", () => {
@@ -24,10 +24,10 @@ describe("finding numerical indexes", () => {
     const data = findNumericalIndexes(['.', '5', '1', '.', '5']);
     expect(data).toEqual([1, 2, 4]);
   }),
-  it("works with symbols in the array", () => {
-    const data = findNumericalIndexes(['*', '5', '1', '*', '5']);
-    expect(data).toEqual([1, 2, 4]);
-  });
+    it("works with symbols in the array", () => {
+      const data = findNumericalIndexes(['*', '5', '1', '*', '5']);
+      expect(data).toEqual([1, 2, 4]);
+    });
 });
 
 describe("grouping consecutive numbers", () => {
@@ -48,4 +48,12 @@ describe("numbers and their indexes in an array", () => {
     expect(data[0]).toEqual({ indexes: [1, 2], value: 51 });
     expect(data[1]).toEqual({ indexes: [4], value: 5 });
   })
+});
+
+describe("part 1 solution", () => {
+  it("returns correct answer for sample data", async () => {
+    const data = await answerPart1('./test.txt');
+    expect(data).toEqual(4361);
+  })
+
 });

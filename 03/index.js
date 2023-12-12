@@ -76,8 +76,8 @@ const checkForCommonItems = (array1, array2) => {
     return array1.some(item => array2.includes(item))
 }
 
-const answerPart1 = async () => {
-    const parsedData = await parseInput('./input.txt')
+const answerPart1 = async (input) => {
+    const parsedData = await parseInput(input)
 
     let count = 0;
     parsedData.forEach((line, index) => {
@@ -109,9 +109,9 @@ const answerPart1 = async () => {
                 console.log('loser', numberObject.value)}
         })
     })
-    console.log(count)
+    return count 
 }
 
-answerPart1()
+// answerPart1('./input.txt')
 
-export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, groupConsecutiveNumbers, findNumbersInArray }
+export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, groupConsecutiveNumbers, findNumbersInArray, answerPart1 }
