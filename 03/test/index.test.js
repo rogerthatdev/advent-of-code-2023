@@ -1,4 +1,4 @@
-import { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, findNumbersInArray, groupConsecutiveNumbers, answerPart1 } from "../index";
+import { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, findNumbersInArray, groupConsecutiveNumbers, answerPart1, findGearIndexes } from "../index";
 
 describe("findSymbols", () => {
   it("returns an array", () => {
@@ -57,3 +57,10 @@ describe("part 1 solution", () => {
   })
 
 });
+
+describe("gear indexes", () => {
+  it('returns array of indexes', () => {
+    const data = findGearIndexes(['.', '.', '*']);
+    expect(data).toEqual([2]);
+  })
+})

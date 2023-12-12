@@ -23,6 +23,17 @@ const findSymbols = x => {
     return symbolIndexes
 }
 
+const findGearIndexes = x => {
+    const gearIndexes = [];
+    for (let i = 0; i < x.length; i++) {
+        if (/\*/.test(x[i])) {
+            gearIndexes.push(i)
+        }
+
+    }
+    return gearIndexes
+}
+
 const checkIndexForSymbol = (anArray, index) => {
     const exceptions = ['.'];
     return !/^[a-zA-Z0-9]+$/.test(anArray[index]) && !exceptions.includes(anArray[index]) ? true : false;
@@ -100,18 +111,30 @@ const answerPart1 = async (input) => {
                 count += numberObject.value
             } else if (checkForCommonItems(precedingLineSymbols, [leftOf, ...numberObject.indexes, rightOf])) {
                 count += numberObject.value
-            } else if (checkForCommonItems(proceedingLineSymbols, [leftOf,...numberObject.indexes, rightOf])) {
+            } else if (checkForCommonItems(proceedingLineSymbols, [leftOf, ...numberObject.indexes, rightOf])) {
                 count += numberObject.value
                 console.log('found below', numberObject.value)
             } else {
                 console.log(precedingLineSymbols)
                 console.log(proceedingLineSymbols)
-                console.log('loser', numberObject.value)}
+                console.log('loser', numberObject.value)
+            }
         })
     })
-    return count 
+    return count
 }
 
 // answerPart1('./input.txt')
 
-export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, groupConsecutiveNumbers, findNumbersInArray, answerPart1 }
+const answerPart2 = async (input) => {
+    const parsedData = await parseInput(input)
+    let count = 0;
+    parsedData.forEach((line, index) => {
+
+
+    })
+}
+
+// answerPart2('./test.txt')
+
+export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, groupConsecutiveNumbers, findNumbersInArray, answerPart1, findGearIndexes }
