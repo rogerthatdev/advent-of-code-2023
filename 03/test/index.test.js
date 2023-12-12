@@ -38,6 +38,10 @@ describe("numbers and their indexes in an array", () => {
     const data = findNumbersInArray(['.', '5', '1', '.', '5']);
     expect(data[0]).toEqual({ indexes: [1, 2], value: 51 });
     expect(data[1]).toEqual({ indexes: [4], value: 5 });
-    // expect(data).toEqual([{index},{}]);
+  }),
+  it("works with symbols in the array", () => {
+    const data = findNumbersInArray(['*', '5', '1', '.', '5']);
+    expect(data[0]).toEqual({ indexes: [1, 2], value: 51 });
+    expect(data[1]).toEqual({ indexes: [4], value: 5 });
   })
 });
