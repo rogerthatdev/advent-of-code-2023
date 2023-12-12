@@ -56,11 +56,20 @@ const groupConsecutiveNumbers = anArray => {
     return reduced
 }
 
-
 const findNumbersInArray = anArray => {
-    return anArray.join('').split(/\.+/).filter(x => x.length > 0).map(x => parseInt(x))
+    let numberObjectList = [];
+    const numericalIndexes = findNumericalIndexes(anArray);
+    const groups = groupConsecutiveNumbers(numericalIndexes);
+    const numbers = anArray.join('').split(/\.+/).filter(x => x.length > 0).map(x => parseInt(x))
+    
+    for (let i = 0; i < groups.length; i++){
+        numberObjectList.push({
+            indexes: groups[i],
+            value: numbers[i]
+        })
+    }
+    return numberObjectList
     
 }
-console.log(`groupConsecutiveNumbers:`, groupConsecutiveNumbers([1, 2, 4, 5]))
 
-export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, findNumbersInArray, groupConsecutiveNumbers }
+export { parseInput, findSymbols, checkIndexForSymbol, findNumericalIndexes, groupConsecutiveNumbers, findNumbersInArray }

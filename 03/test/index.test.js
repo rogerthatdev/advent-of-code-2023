@@ -31,4 +31,13 @@ describe("grouping consecutive numbers", () => {
     const data = groupConsecutiveNumbers([1, 2, 4, 5, 9]);
     expect(data).toEqual([[1, 2], [4, 5], [9]]);
   })
-})
+});
+
+describe("numbers and their indexes in an array", () => {
+  it("returns an array of objects with numbers and their indexes", () => {
+    const data = findNumbersInArray(['.', '5', '1', '.', '5']);
+    expect(data[0]).toEqual({ indexes: [1, 2], value: 51 });
+    expect(data[1]).toEqual({ indexes: [4], value: 5 });
+    // expect(data).toEqual([{index},{}]);
+  })
+});
