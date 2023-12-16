@@ -9,20 +9,7 @@ const parseInput = async input => {
         const cards = lineSplit.map(line => line.split(':')[1].split('|').map(set => set.split(' ').filter(x => x != '')))
         // console.log(cards)
         // cards is an array of arrays of arrays [[[winning numbers ],[your numbers ]]]
-
-        const matches = cards.map(card => {
-            const winners = card[0]
-            const yourNumbers = card[1]
-            const yourMatches = yourNumbers.filter(number => winners.includes(number))
-            return yourMatches
-        }).filter(x => x.length != 0)
-
-        console.log(`matches`, matches)
-
-        const score = matches.reduce((a, b) => {
-            return a + 2 ** (b.length - 1)
-        }, 0)
-        return score
+        return cards
 
     } catch (err) {
         console.error(err);
@@ -38,6 +25,20 @@ const secondFunction = async x => {
     }
 }
 
-parseInput('input.txt').then(data => console.log(`answer`, data))
+parseInput('input.txt').then(data => {
+    const matches = data.map(card => {
+        const winners = card[0]
+        const yourNumbers = card[1]
+        const yourMatches = yourNumbers.filter(number => winners.includes(number))
+        return yourMatches
+    }).filter(x => x.length != 0)
+
+    console.log(`matches`, matches)
+
+    const score = matches.reduce((a, b) => {
+        return a + 2 ** (b.length - 1)
+    }, 0)
+    console.log(score)
+})
 
 export { parseInput, secondFunction }
