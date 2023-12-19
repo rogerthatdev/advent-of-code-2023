@@ -16,29 +16,21 @@ const parseInput = async input => {
     }
 }
 
-const secondFunction = async x => {
-    try {
-        return x
-
-    } catch (err) {
-        console.error(err);
-    }
+const returnMatches = card => {
+    const winners = card[0]
+    const yourNumbers = card[1]
+    const yourMatches = yourNumbers.filter(number => winners.includes(number))
+    return yourMatches.filter(x => x.length != 0)
 }
 
 parseInput('test/test.txt').then(data => {
-    const matches =  data.map(card => {
-        const winners = card[0]
-        const yourNumbers = card[1]
-        const yourMatches = yourNumbers.filter(number => winners.includes(number))
-        return yourMatches
-    }).filter(x => x.length != 0)
-
-    // console.log(`matches`, matches)
+    const matches =  data.map(returnMatches)
 
     const score = matches.reduce((a, b) => {
         return a + 2 ** (b.length - 1)
     }, 0)
-    // console.log(score)
+
+    return score
 })
 
-export { parseInput, secondFunction }
+export { parseInput, returnMatches }

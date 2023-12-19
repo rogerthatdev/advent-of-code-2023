@@ -1,4 +1,4 @@
-import { parseInput, secondFunction } from "../index";
+import { parseInput, returnMatches } from "../index";
 
 describe("test data", () => {
   it("parses input into an array", async () => {
@@ -9,5 +9,11 @@ describe("test data", () => {
           [ [ '1', '21' ], [ '69', '82' ] ]
         ]);
     })
+  });
+});
+
+describe("finding matches", () => {
+  it("returns matches", () => {
+    expect(returnMatches([ [ '41', '48', '' ], [ '83', '86', '48', '' ] ])).toEqual(['48'])
   });
 });
