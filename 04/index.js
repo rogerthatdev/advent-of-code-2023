@@ -23,14 +23,18 @@ const returnMatches = card => {
     return yourMatches.filter(x => x.length != 0)
 }
 
-parseInput('test/test.txt').then(data => {
-    const matches =  data.map(returnMatches)
-
-    const score = matches.reduce((a, b) => {
+const caclulateScore = matches => {
+    const reduced = matches.reduce((a, b)=> {
+        if (b.length < 1) return a + 0
         return a + 2 ** (b.length - 1)
-    }, 0)
+    },0)
+    return reduced
+}
 
+parseInput('input.txt').then(data => {
+    const matches =  data.map(returnMatches)
+    const score = caclulateScore(matches)
     return score
 })
 
-export { parseInput, returnMatches }
+export { parseInput, returnMatches, caclulateScore }
