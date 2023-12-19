@@ -25,20 +25,20 @@ const secondFunction = async x => {
     }
 }
 
-parseInput('input.txt').then(data => {
-    const matches = data.map(card => {
+parseInput('test/test.txt').then(data => {
+    const matches =  data.map(card => {
         const winners = card[0]
         const yourNumbers = card[1]
         const yourMatches = yourNumbers.filter(number => winners.includes(number))
         return yourMatches
     }).filter(x => x.length != 0)
 
-    console.log(`matches`, matches)
+    // console.log(`matches`, matches)
 
     const score = matches.reduce((a, b) => {
         return a + 2 ** (b.length - 1)
     }, 0)
-    console.log(score)
+    // console.log(score)
 })
 
 export { parseInput, secondFunction }
