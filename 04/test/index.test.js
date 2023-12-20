@@ -1,4 +1,4 @@
-import { parseInput, returnMatches, caclulateScore } from "../index";
+import { parseInput, returnMatches, calculateScore } from "../index";
 
 describe("test data", () => {
   it("parses input into an array", async () => {
@@ -22,13 +22,13 @@ describe("finding matches", () => {
 describe("calculate scores", () => {
   it("calculate score given 2 matches", () => {
     
-    expect(caclulateScore([['48', '32', '33', '5'], ['33']])).toEqual(9)
+    expect(calculateScore([['48', '32', '33', '5'], ['33']])).toEqual(9)
   });
 });
 
 describe("end to end", () => {
   it("returns part1 answer 21088", async () => {
-    const answer = await parseInput('input.txt').then(data => caclulateScore(data.map(returnMatches)))
+    const answer = await parseInput('input.txt').then(data => calculateScore(data.map(returnMatches)))
     expect(answer).toEqual(21088)
   });
 });
